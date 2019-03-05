@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 public class USACO{
   public int[][] lake;
   public ArrayList<ArrayList<Integer>> instructions;
-  public void info(String name){
+  public void info(String name) throws FileNotFoundException{
     File file = new File(name);
     Scanner text = new Scanner(file);
     String output = text.nextLine();
@@ -9,7 +13,7 @@ public class USACO{
     int counter = 0;
     while(counter < lake.length){
       output = text.nextLine();
-      for(int i = 0; i < output.length; i++){
+      for(int i = 0; i < output.length(); i++){
         lake[counter][i] = Integer.parseInt(output.substring(i, i + 1));}
       counter ++;}
     instructions = new ArrayList<ArrayList<Integer>>();
