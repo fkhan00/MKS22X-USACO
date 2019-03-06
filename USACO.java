@@ -15,12 +15,18 @@ public class USACO{
       for(int i = 0; i < lake[0].length; i++){
         lake[counter][i] = text.nextInt();}
       counter ++;
-    }}
+    }
+    instructions = new ArrayList<ArrayList<Integer>>();
+    while(text.hasNextInt()){
+      instructions.add(new ArrayList<Integer>());
+      for(int i = 0; i < 3; i++){
+        instructions.get(instructions.size() - 1).add(text.nextInt());}}
+  }
   public String toString(){
     String output = "";
-    for(int i = 0; i < lake.length; i++){
-      for(int j = 0; j < lake[0].length; j++){
-        output += lake[i][j] + " ";
+    for(int i = 0; i < instructions.size(); i++){
+      for(int j = 0; j < instructions.get(0).size(); j++){
+        output += instructions.get(i).get(j) + " ";
       }
       output += "\n";
     }
