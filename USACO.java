@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 public class USACO{
   public int[][] lake;
   public ArrayList<ArrayList<Integer>> instructions;
@@ -24,22 +25,24 @@ public class USACO{
   }
   public String toString(){
     String output = "";
-    for(int i = 0; i < instructions.size(); i++){
-      for(int j = 0; j < instructions.get(0).size(); j++){
-        output += instructions.get(i).get(j) + " ";}
+    for(int i = 0; i < lake.length; i++){
+      for(int j = 0; j < lake[0].length; j++){
+        output += lake[i][j] + " ";}
       output += "\n";}
   return output;}
 
   public void stomp(int ins){
-    int[] herd = new int[9];
+    ArrayList<Integer> herd = new ArrayList<Integer>();
     int counter = 0;
     for(int i = 0; i < 3; i++){
       for(int j = 0; j < 3; j++){
-        herd[counter] = lake[instructions.get(ins).get(0)][instructions.get(ins).get(0)];}}
+        herd.add(lake[instructions.get(ins).get(0) + i - 1][instructions.get(ins).get(1) + j - 1]);}}
     Collections.sort(herd);
-    herd[0] -= instructions.get(ins).get(2);
-    for(int i = 0; i < herd.length; i++){
-      if(herd[i] >= herd[0]){
-        herd[i] = herd[0];}}}
+    herd.set(herd.size() - 1, herd.get(herd.size() - 1) - instructions.get(ins).get(2));
+    System.out.println(herd.toString());
+    for(int i = 0; i < herd.size(); i++){
+      System.out.println(herd.toString());
+      if(herd.get(i) >= herd.get(herd.size() - 1)){
+        herd.set(i, herd.get(herd.size() - 1));}}}
 
-}
+      }
