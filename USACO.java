@@ -33,16 +33,19 @@ public class USACO{
 
   public void stomp(int ins){
     ArrayList<Integer> herd = new ArrayList<Integer>();
-    int counter = 0;
     for(int i = 0; i < 3; i++){
       for(int j = 0; j < 3; j++){
         herd.add(lake[instructions.get(ins).get(0) + i - 1][instructions.get(ins).get(1) + j - 1]);}}
-    Collections.sort(herd);
-    herd.set(herd.size() - 1, herd.get(herd.size() - 1) - instructions.get(ins).get(2));
-    System.out.println(herd.toString());
+    int max = Collections.max(herd);
+    herd.set(herd.indexOf(max), max - instructions.get(ins).get(2));
     for(int i = 0; i < herd.size(); i++){
-      System.out.println(herd.toString());
-      if(herd.get(i) >= herd.get(herd.size() - 1)){
-        herd.set(i, herd.get(herd.size() - 1));}}}
+      if(herd.get(i) >= herd.get(herd.indexOf(max - instructions.get(ins).get(2))))
+      {
+        herd.set(i, herd.get(herd.indexOf(max - instructions.get(ins).get(2))));}}
+    int counter = 0;
+    for(int i = 0; i < 3; i++){
+      for(int j = 0; j < 3; j++){
+        lake[instructions.get(ins).get(0) + i - 1][instructions.get(ins).get(1) + j - 1] = herd.get(counter);
+        counter ++;}}}
 
-      }
+}
