@@ -27,9 +27,11 @@ public class Silver{
     end[1] = scan.nextInt();}
 
   public void expand(int n){
-    if(n == 1){
-      ways[start[0]][start[1]] = 1;}
-    if (n == 2){
+    if(n == 0){
+      ways[start[0]][start[1]] = 1;
+      return;
+    }
+    if (n == 1){
       ways[start[0]][start[1]] = 0;
       ways[start[0] + 1][start[1]] = 1;
       ways[start[0]][start[1] + 1] = 1;
@@ -56,21 +58,33 @@ public class Silver{
             newWay[i][j] = ways[i + 1][j] + ways[i][j - 1];}}
           catch(IndexOutOfBoundsException e){}}}
         try{
-        newWay[start[0] + n][start[1]] = 1;
-        newWay[start[0]][start[1] + n] = 1;
-        newWay[start[0] - n][start[1]] = 1;
+        newWay[start[0] + n][start[1]] = 1;}
+        catch(IndexOutOfBoundsException e){}
+        try{
+        newWay[start[0]][start[1] + n] = 1;}
+        catch(IndexOutOfBoundsException e){}
+        try{
+        newWay[start[0] - n][start[1]] = 1;}
+        catch(IndexOutOfBoundsException e){}
+        try{
         newWay[start[0]][start[1] - n] = 1;}
         catch(IndexOutOfBoundsException e){}
+        if(n % 2 == 1){
+          newWay[start[0]] [start[1]] = 0;}
+        if(n % 2 == 1){
+          newWay[start[0]][start[1]] = ways[start[0] + 1][start[1]] * 4;}
         for(int i = 0; i < ways.length; i++){
           for(int j = 0; j < ways[0].length; j++){
-            ways[i][j] = newWay[i][j];}}}
+            ways[i][j] = newWay[i][j];}}
+
+          }
 
   }
   public String toString(){
     String output = "";
-    for(int i = 0; i < field.length; i++){
-      for(int j = 0; j < field[0].length; j++){
-        output += field[i][j] + " ";}
+    for(int i = 0; i < ways.length; i++){
+      for(int j = 0; j < ways[0].length; j++){
+        output += ways[i][j] + " ";}
       output += "\n";}
   return output;}
 
