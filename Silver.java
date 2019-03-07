@@ -13,6 +13,7 @@ public class Silver{
     Scanner scan = new Scanner(file);
     field = new String[scan.nextInt()][scan.nextInt()];
     time = scan.nextInt();
+    scan.nextLine();
     String output = "";
     for(int i = 0; i < field.length; i++){
       output = scan.nextLine();
