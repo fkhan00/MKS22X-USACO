@@ -21,10 +21,10 @@ public class Silver{
       output = scan.nextLine();
       for(int j = 0; j < field[0].length; j++){
         field[i][j] = output.substring(j, j + 1);}}
-    start[0] = scan.nextInt();
-    start[1] = scan.nextInt();
-    end[0] = scan.nextInt();
-    end[1] = scan.nextInt();}
+    start[0] = scan.nextInt() - 1;
+    start[1] = scan.nextInt() - 1;
+    end[0] = scan.nextInt() - 1;
+    end[1] = scan.nextInt() - 1;}
 
   public void expand(int n){
     if(n == 0){
@@ -32,11 +32,21 @@ public class Silver{
       return;
     }
     if (n == 1){
-      ways[start[0]][start[1]] = 0;
-      ways[start[0] + 1][start[1]] = 1;
-      ways[start[0]][start[1] + 1] = 1;
-      ways[start[0] - 1][start[1]] = 1;
+      try{
+      ways[start[0]][start[1]] = 0;}
+      catch(IndexOutOfBoundsException e){}
+      try{
+      ways[start[0] + 1][start[1]] = 1;}
+      catch(IndexOutOfBoundsException e){}
+      try{
+      ways[start[0]][start[1] + 1] = 1;}
+      catch(IndexOutOfBoundsException e){}
+      try{
+      ways[start[0] - 1][start[1]] = 1;}
+      catch(IndexOutOfBoundsException e){}
+      try{
       ways[start[0]][start[1] - 1] = 1;}
+      catch(IndexOutOfBoundsException e){}}
     else{
       int[][] newWay = new int[ways.length][ways[0].length];
       for(int i = 0; i < ways.length; i++){
@@ -75,11 +85,20 @@ public class Silver{
           newWay[start[0]][start[1]] = ways[start[0] + 1][start[1]] * 4;}
         for(int i = 0; i < ways.length; i++){
           for(int j = 0; j < ways[0].length; j++){
-            ways[i][j] = newWay[i][j];}}
+            if(field[i][j].equals(".")){
+            ways[i][j] = newWay[i][j];}
+            else{
+              ways[i][j] = 0;
+            }
+          }}}}
 
-          }
-
-  }
+    public int silver(String text) throws FileNotFoundException{
+      info(text);
+      for(int i = 0; i < time; i++){
+        expand(i);}
+      System.out.println(toString());
+      return ways[end[0]][end[1]];
+    }
   public String toString(){
     String output = "";
     for(int i = 0; i < ways.length; i++){
